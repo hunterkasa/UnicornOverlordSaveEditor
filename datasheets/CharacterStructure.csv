@@ -1,0 +1,38 @@
+Character structure,,,Example,,Alain,,,,,,,,,,,,,,,,,,
+0x00,16 Bit,Obtained Order,05 00,,05,00,00,00,17,00,00,00,00,00,00,00,00,00,00,00,,ID,Growth Type
+0x04,8 Bit,,17,,01,00,00,00,00,00,00,00,02,00,00,00,02,00,00,00,,00,N/A
+0x10,8 Bit,Always 01,01,,04,00,00,00,FF,FF,FF,FF,02,09,09,00,01,00,00,00,,01,Hardy
+0x18,8 Bit,00 Or 02 Match 0x1C,02,,01,00,FF,04,02,00,00,00,65,97,1C,00,32,00,73,00,,02,Offensive
+0x1C,8 Bit,00 Or 02 Match 0x18,02,,03,00,00,00,00,02,00,00,00,00,00,00,90,02,00,00,,03,Defensive
+0x20,8 Bit,Unit,04,,7B,00,00,00,80,00,00,00,22,02,00,00,CA,00,00,00,,04,Precise
+0x24,16 Bit,Hired Character Name,FF FF,,1F,00,00,00,02,00,00,00,04,00,00,00,00,00,00,00,,05,Lucky
+0x26,16 Bit,Recruit FF FF Hired 00 00,FF FF,,05,00,00,00,FF,FF,00,00,00,00,00,00,41,00,00,00,,06,Keen
+0x28,8 Bit,Class,02,,04,00,00,00,FF,FF,00,00,00,00,00,00,00,00,00,00,,07,Guadian
+0x29,8 Bit,Growth Type 1,09,,03,00,00,00,FF,FF,00,00,00,00,00,00,00,00,00,00,,08,Go-Getter
+0x2A,8 Bit,Growth Type 2,09,,C7,01,00,00,01,00,00,00,04,00,00,00,00,00,00,00,,09,All-Rounder
+0x2C,8 Bit,Base Color Character,01,,09,00,00,00,FF,FF,00,00,00,00,00,00,00,00,00,00,,0A,N/A
+0x2C,8 Bit,Hair Color,00,,08,00,00,00,FF,FF,00,00,00,00,00,00,00,00,00,00,,0B,Grunt
+0x2E,8 Bit,Accent Color 1,00,,07,00,00,00,FF,FF,00,00,00,00,00,00,00,00,00,00,,0C,Standard
+0x2F,8 Bit,Accent Color 2 ,00,,00,00,00,00,FF,FF,00,00,00,00,00,00,00,00,00,00,,0D,Powerful
+0x30,8 Bit,Class Promotion Sprite/Portrait 01-02,01,,00,00,00,00,FF,FF,00,00,00,00,00,00,00,00,00,00,,0E,Boss
+0x31,8 Bit,Class Specific Variation Sprite/Portrait,00,,00,00,00,00,FF,FF,00,00,00,00,00,00,00,00,00,00,,0F,Josef
+0x32,16 Bit,Combat Voice/ Animation Sounds,FF 04,,00,00,00,00,FF,FF,00,00,00,00,00,00,00,00,00,00,,10,Mercenary
+0x34,16 Bit,Name (No Effect If Hired),02 00,,00,00,00,00,FF,FF,00,00,00,00,00,00,00,00,00,00,,,
+0x38,32 Bit,Exp,65 97 1C 00,,00,00,00,00,FF,FF,00,00,00,00,00,00,00,00,00,00,,,
+0x3C,8 Bit,Level,32,,00,00,00,00,FF,FF,00,00,00,00,00,00,00,00,00,00,,,
+0x3E,8 Bit,Health,73,,00,00,00,00,FF,FF,00,00,00,00,00,00,00,00,00,00,,,
+0x40,8 Bit,Dew Of Vitality,03,,2C,50,A9,FF,00,00,00,FF,60,82,D6,FF,01,00,00,00,,,
+0x41,8 Bit,Dew Of Strength,00,,1A,16,03,13,13,13,13,15,00,00,00,00,00,00,00,00,,,
+0x42,8 Bit,Dew Of Protection,00,,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,,,
+0x43,8 Bit,Dew Of Knowledge,00,,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,,,
+0x44,8 Bit,Dew Of Warding,00,,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,,,
+0x45,8 Bit,Dew Of Skill,02,,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,,,
+0x46,8 Bit,Dew Of Acuity,00,,FF,FF,FF,FF,FF,FF,FF,FF,06,00,00,00,09,00,00,00,,,
+0x47,8 Bit,Dew Of Keeness,00,,,,,,,,,,,,,,,,,,,,
+0x48,8 Bit,Dew Of Parry,00,,,,,,,,,,,,,,,,,,,,
+0x49,8 Bit,Dew Of Agility,00,,,,,,,,,,,,,,,,,,,,
+0x4A,8 Bit,Dew Of Illusion,00,,,,,,,,,,,,,,,,,,,,
+0x4C,16 Bit,Weapon*,90 02,* dosen't match item id could be pointer or item order,,,,,,,,,,,,,,,,,,,
+0x50,16 Bit,Shield*,7B 00,,,,,,,,,,,,,,,,,,,,
+0x54,16 Bit,Accessory 1*,80 00,,,,,,,,,,,,,,,,,,,,
+0x56,16 Bit,Accessory 2*,22 02,,,,,,,,,,,,,,,,,,,,

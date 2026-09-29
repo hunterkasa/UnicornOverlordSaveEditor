@@ -1,0 +1,74 @@
+ID,Hex ID,Class
+1,01,Lord
+2,02,High Lord
+3,03,Fighter
+4,04,Vanguard
+5,05,Soldier
+6,06,Sergeant
+7,07,Housecarl
+8,08,Viking
+9,09,Sword Fighter
+10,0A,Swordmaster
+11,0B,Sellsword
+12,0C,Landsknecht
+13,0D,Hoplite
+14,0E,Legionnaire
+15,0F,Gladiator
+16,10,Berserker
+17,11,Warrior
+18,12,Breaker
+19,13,Hunter
+20,14,Sniper
+21,15,Arbalist
+22,16,Shield Shooter
+23,17,Thief
+24,18,Rogue
+25,19,Knight
+26,1A,Great Knight
+27,1B,Radiant Knight
+28,1C,Sainted Knight
+29,1D,Dark Knight
+30,1E,Doom Knight
+31,1F,Cleric
+32,20,Bishop
+33,21,Wizard
+34,22,Warlock
+35,23,Witch
+36,24,Sorceress
+37,25,Shaman
+38,26,Druid
+39,27,Wyvern Knight
+40,28,Wyvern Master
+41,29,Gryphon Knight
+42,2A,Gryphon Master
+43,2B,Elven Fencer
+44,2C,Elven Archer
+45,2D,Werewolf
+46,2E,Werefox
+47,2F,Werebear
+48,30,Wereowl
+49,31,Feathersword
+50,32,Featherbow
+51,33,Featherstaff
+52,34,Feathershield
+53,35,Priestess
+54,36,High Priestess
+55,37,Crusader
+56,38,Valkyria
+57,39,Elven Sibyl
+58,3A,Elven Augur
+59,3B,Snow Ranger
+60,3C,Werelion
+61,3D,Paladin
+62,3E,Prince
+63,3F,Dreadnought
+64,40,Possessed Dreadnought
+65,41,Necromancer
+66,42,Necromancer
+67,43,Dark Lord
+68,44,Overlord
+69,45,Dark Marquess
+70,46,Dark Marquess
+71,47,Dark Marquess
+72,48,Dark Marquess
+73,49,Dark Marquess
