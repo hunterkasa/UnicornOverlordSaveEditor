@@ -4,14 +4,13 @@ An enhanced, robust save editor for *Unicorn Overlord* on the Nintendo Switch (W
 
 ---
 
-## ⚡ Quick Start
-1. To launch the compiled editor immediately:
-   * Double-click **`Run-SaveEditor.bat`** (or open [`publish\UnicornOverlord.exe`](publish/UnicornOverlord.exe)).
-2. To compile and run manually via .NET CLI:
-   ```cmd
-   dotnet build -c Release
-   dotnet run --project UnicornOverlord
-   ```
+## ⚡ Build & Run
+* **Visual Studio 2022**: Open `UnicornOverlord.sln` and press **F5** (or **Ctrl+F5**).
+* **.NET CLI**:
+  ```cmd
+  dotnet build -c Release
+  dotnet run --project UnicornOverlord
+  ```
 
 ---
 
@@ -31,7 +30,7 @@ An enhanced, robust save editor for *Unicorn Overlord* on the Nintendo Switch (W
 6. Look for `UCSAVEFILE01.DAT` (Slot 1), `UCSAVEFILE02.DAT` (Slot 2), etc. Copy it to your PC.
 
 ### 3. Editing with Unicorn Overlord Save Editor
-1. Open [`Run-SaveEditor.bat`](Run-SaveEditor.bat) (or `publish\UnicornOverlord.exe`).
+1. Launch the editor.
 2. Click **Open Save...** (`Ctrl+O`) and choose your `UCSAVEFILExx.DAT`.
 3. *Note: An automatic timestamped backup is generated in the `backup/` directory every time you open or save.*
 4. Edit your desired currencies, characters, bonds, items, equipment, and units.
@@ -63,6 +62,8 @@ An enhanced, robust save editor for *Unicorn Overlord* on the Nintendo Switch (W
   * **Type 10 - All-Rounder+ (Super Growth)**: Hidden stat growth granting +100 to all stats across the board at Lv. 50.
 * **Stat Dews**: Edit bonuses for HP, P-Atk, P-Def, M-Atk, M-Def, Initiative, Accuracy, Critical, Guard, Evasion (supports legit max of 5 or custom boosts).
 * **Hired Mercenary Names**: Proper name resolution for custom mercenaries.
+* **Character Cloning & Army Expansion**:
+  * Clone any character or mercenary with one click to expand your army up to the full 500-slot save capacity (bypassing the in-game 64-mercenary Fort cap).
 * **Appearance Colors**: Customize character color palettes.
 * **Rapport Bonds**:
   * Real partner name resolution for all army relationships.
@@ -92,4 +93,12 @@ An enhanced, robust save editor for *Unicorn Overlord* on the Nintendo Switch (W
 ## 🛡️ Reliability & Safety
 * **Atomic File Saving**: Edits are written to a temporary file first before swapping to ensure your save file is never corrupted if interrupted.
 * **Automatic Backups**: Safe timestamped backups are automatically placed in `backup/`.
-* **56 Automated Tests**: Validated against real Nintendo Switch save data with 100% pass rate.
+* **59 Automated Tests**: Validated against real Nintendo Switch save data with 100% pass rate.
+
+---
+
+## Special Thanks
+* [turtle-insect](https://github.com/turtle-insect) (Original project author)
+* [pauljames80](https://gbatemp.net/members/pj1980.378437/)
+* [GBAtemp](https://gbatemp.net/threads/unicorn-overlord-save-editing.650584/)
+* [DataSheet](https://docs.google.com/spreadsheets/d/1UXe4nEloKlv14P4H4cOKeJc8R2P1fZW_HaLAuQG96BQ)
