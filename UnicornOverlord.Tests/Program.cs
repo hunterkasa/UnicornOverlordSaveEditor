@@ -232,19 +232,17 @@ namespace UnicornOverlord.Tests
 			Assert(vm.Units.All(u => u.Capacity == 5 && u.Valid), "Reloaded units retain 5 members and valid status");
 			Assert(vm.Equipments.Count > preWeaponsEqCount, "Reloaded equipment retains batch added items");
 
-			// 9. Test Upgrade All Weapons
-			Console.WriteLine("\n--- Testing Upgrade All Weapons ---");
-			vm.UpgradeAllWeaponsCommand.Execute(null);
-			var weapons = vm.Equipments.Where(e => e.CategoryName == "Weapons").ToList();
-			Assert(weapons.Count > 0, "Weapons exist in equipment inventory", $"Count: {weapons.Count}");
-			Assert(weapons.All(w => w.Upgraded), "All weapons in equipment inventory are upgraded (★)");
+			// 9. Test Upgrade All Equipment
+			Console.WriteLine("\n--- Testing Upgrade All Equipment ---");
+			vm.UpgradeAllEquipmentCommand.Execute(null);
+			Assert(vm.Equipments.Count > 0, "Equipment exists in inventory", $"Count: {vm.Equipments.Count}");
+			Assert(vm.Equipments.All(e => e.Upgraded), "All equipment items in inventory and equipped are upgraded (★)");
 
 			// Persist and verify reload
 			SaveData.Instance().Save();
 			SaveData.Instance().Open(tempSave);
 			vm.Initialize();
-			var reloadedWeapons = vm.Equipments.Where(e => e.CategoryName == "Weapons").ToList();
-			Assert(reloadedWeapons.All(w => w.Upgraded), "All reloaded weapons retain upgraded status (★)");
+			Assert(vm.Equipments.All(e => e.Upgraded), "All reloaded equipment items retain upgraded status (★)");
 
 			// Cleanup
 			try { File.Delete(tempSave); } catch { }
