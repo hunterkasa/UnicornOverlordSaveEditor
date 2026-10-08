@@ -63,6 +63,7 @@ namespace UnicornOverlord
 		public ICommand AddAllWeaponsCommand { get; set; }
 		public ICommand AddAllShieldsCommand { get; set; }
 		public ICommand AddAllAccessoriesCommand { get; set; }
+		public ICommand UpgradeAllWeaponsCommand { get; set; }
 
 		// Unit Commands
 		public ICommand UnlockAllUnitsCommand { get; set; }
@@ -227,6 +228,7 @@ namespace UnicornOverlord
 			AddAllWeaponsCommand = new ActionCommand(AddAllWeapons);
 			AddAllShieldsCommand = new ActionCommand(AddAllShields);
 			AddAllAccessoriesCommand = new ActionCommand(AddAllAccessories);
+			UpgradeAllWeaponsCommand = new ActionCommand(UpgradeAllWeapons);
 
 			SetMaxLevelCommand = new ActionCommand(SetMaxLevelSelected);
 			SetMaxLevelAllCommand = new ActionCommand(SetMaxLevelAll);
@@ -1068,6 +1070,43 @@ namespace UnicornOverlord
 				.ToList();
 
 			AddBatch(accIds, isEquipment: true, defaultCount: 0, "Accessories");
+		}
+
+		private void UpgradeAllWeapons(object? parameter)
+		{
+			if (!SaveData.Instance().IsLoaded) return;
+
+			var weapons = Equipments.Concat(Items)
+				.Where(it => it.CategoryName == "Weapons")
+				.ToList();
+
+			if (weapons.Count == 0)
+			{
+				if (!SuppressDialogs)
+					MessageBox.Show("No weapons found in inventory or equipment.", "No Weapons", MessageBoxButton.OK, MessageBoxImage.Information);
+				return;
+			}
+
+			int newlyUpgraded = 0;
+			foreach (var wp in weapons)
+			{
+				if (!wp.Upgraded)
+				{
+					wp.Upgraded = true;
+					newlyUpgraded++;
+				}
+			}
+
+			FilteredEquipments.Refresh();
+			FilteredItems.Refresh();
+
+			string msg = $"Upgraded {newlyUpgraded} weapon(s) to maximum tier (★). All {weapons.Count} weapons are now fully upgraded.";
+			UpdateStatus(msg);
+
+			if (!SuppressDialogs)
+			{
+				MessageBox.Show(msg, "Weapons Upgraded", MessageBoxButton.OK, MessageBoxImage.Information);
+			}
 		}
 		#endregion
 
