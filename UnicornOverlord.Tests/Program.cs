@@ -21,6 +21,7 @@ namespace UnicornOverlord.Tests
 			{
 				TestDatabaseLoading();
 				TestGrowthTypes();
+				TestItemUpgradedBinaryFormat();
 				TestRealSaveFileOperations();
 			}
 			catch (Exception ex)
@@ -93,6 +94,66 @@ namespace UnicornOverlord.Tests
 
 			var hardy = GrowthTypeInfo.Get(1);
 			Assert(hardy.ID == 1 && hardy.Name == "Hardy", "Growth Type 1 is Hardy", $"Actual: '{hardy.DisplayText}'");
+		}
+
+		private static void TestItemUpgradedBinaryFormat()
+		{
+			Console.WriteLine("\n--- Testing Item Upgraded Binary Format (+16 high nibble & +17 zero) ---");
+			string mockPath = Path.Combine(AppContext.BaseDirectory, "MOCK_SAVE.DAT");
+			try
+			{
+				byte[] buffer = new byte[65536];
+				System.Text.Encoding.ASCII.GetBytes("UCSD").CopyTo(buffer, 4);
+				File.WriteAllBytes(mockPath, buffer);
+
+				bool opened = SaveData.Instance().Open(mockPath);
+				Assert(opened, "Mock SaveData Open returned true");
+
+				uint itemAddr = Util.ItemBaseAddress; // 0xA0
+				var item = new Item(itemAddr);
+				item.ID = 282; // Bronze Sword (Type 5: Weapons)
+				item.Status = 5; // 0x05 (un-upgraded weapon)
+
+				Assert(!item.Upgraded, "Initial weapon is not upgraded", $"Byte 16: 0x{SaveData.Instance().ReadNumber(itemAddr + 16, 1):X2}");
+				Assert(SaveData.Instance().ReadNumber(itemAddr + 16, 1) == 0x05, "Byte 16 is 0x05 for un-upgraded weapon");
+				Assert(SaveData.Instance().ReadNumber(itemAddr + 17, 1) == 0x00, "Byte 17 is 0x00 (padding)");
+
+				// Test Upgrading: should set byte 16 to 0x15 and keep/set byte 17 as 0x00
+				item.Upgraded = true;
+				Assert(item.Upgraded, "Item reports upgraded is true");
+				Assert(SaveData.Instance().ReadNumber(itemAddr + 16, 1) == 0x15, "Byte 16 is 0x15 (high nibble 1, low nibble 5)", $"Actual: 0x{SaveData.Instance().ReadNumber(itemAddr + 16, 1):X2}");
+				Assert(SaveData.Instance().ReadNumber(itemAddr + 17, 1) == 0x00, "Byte 17 is 0x00", $"Actual: 0x{SaveData.Instance().ReadNumber(itemAddr + 17, 1):X2}");
+				Assert(item.Status == 0x15, "32-bit Status is 0x15 (21)", $"Actual: {item.Status}");
+
+				// Test reverting upgrade
+				item.Upgraded = false;
+				Assert(!item.Upgraded, "Item reports upgraded is false after reset");
+				Assert(SaveData.Instance().ReadNumber(itemAddr + 16, 1) == 0x05, "Byte 16 is reset to 0x05", $"Actual: 0x{SaveData.Instance().ReadNumber(itemAddr + 16, 1):X2}");
+				Assert(SaveData.Instance().ReadNumber(itemAddr + 17, 1) == 0x00, "Byte 17 remains 0x00", $"Actual: 0x{SaveData.Instance().ReadNumber(itemAddr + 17, 1):X2}");
+
+				// Test resilience against corrupted save (where old bug wrote 1 to byte 17 and left byte 16 as 0x05)
+				SaveData.Instance().WriteNumber(itemAddr + 16, 1, 0x05);
+				SaveData.Instance().WriteNumber(itemAddr + 17, 1, 0x01);
+				Assert(!item.Upgraded, "Item with bugged byte 17=0x01 correctly reports false because byte 16 is 0x05");
+
+				// Upgrading repairs both byte 16 to 0x15 and byte 17 back to 0x00
+				item.Upgraded = true;
+				Assert(item.Upgraded, "Item upgraded is true after repair");
+				Assert(SaveData.Instance().ReadNumber(itemAddr + 16, 1) == 0x15, "Repaired byte 16 is 0x15");
+				Assert(SaveData.Instance().ReadNumber(itemAddr + 17, 1) == 0x00, "Repaired byte 17 is cleaned back to 0x00");
+
+				// Verify persistence on disk
+				SaveData.Instance().Save();
+				SaveData.Instance().Open(mockPath);
+				var reloadedItem = new Item(itemAddr);
+				Assert(reloadedItem.Upgraded, "Reloaded item from disk retains upgraded status");
+				Assert(SaveData.Instance().ReadNumber(itemAddr + 16, 1) == 0x15, "Reloaded disk byte 16 is 0x15");
+				Assert(SaveData.Instance().ReadNumber(itemAddr + 17, 1) == 0x00, "Reloaded disk byte 17 is 0x00");
+			}
+			finally
+			{
+				try { if (File.Exists(mockPath)) File.Delete(mockPath); } catch { }
+			}
 		}
 
 		private static void TestRealSaveFileOperations()

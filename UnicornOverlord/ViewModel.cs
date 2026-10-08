@@ -1087,25 +1087,29 @@ namespace UnicornOverlord
 				return;
 			}
 
-			int newlyUpgraded = 0;
+			int count = 0;
 			foreach (var eq in allEquipment)
 			{
-				if (!eq.Upgraded)
-				{
-					eq.Upgraded = true;
-					newlyUpgraded++;
-				}
+				eq.Upgraded = true;
+				count++;
 			}
 
 			FilteredEquipments.Refresh();
 			FilteredItems.Refresh();
 
-			string msg = $"Upgraded {newlyUpgraded} equipment item(s) to maximum tier (★). All {allEquipment.Count} equipment items are now fully upgraded.";
+			string msg = $"Upgraded {count} equipment item(s) to maximum forge tier (★).";
 			UpdateStatus(msg);
 
 			if (!SuppressDialogs)
 			{
-				MessageBox.Show(msg, "Equipment Upgraded", MessageBoxButton.OK, MessageBoxImage.Information);
+				MessageBox.Show(
+					$"Successfully upgraded {count} equipment item(s)!\n\n" +
+					"• Weapon attack stats are boosted to max forge tier (25 Phys/Mag ATK).\n" +
+					"• Shield defense and guard rates are maximized.\n\n" +
+					"IMPORTANT NOTE FOR IN-GAME:\n" +
+					"Unicorn Overlord does NOT display a star icon next to items in menus. " +
+					"To verify in-game, open your inventory and look at the item's Attack or Defense stat (e.g. Bronze Sword will show 25 ATK instead of 4 ATK).",
+					"Equipment Upgraded", MessageBoxButton.OK, MessageBoxImage.Information);
 			}
 		}
 		#endregion
