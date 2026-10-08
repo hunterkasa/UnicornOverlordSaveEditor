@@ -83,6 +83,7 @@ An enhanced, robust save editor for *Unicorn Overlord* on the Nintendo Switch (W
   * `Add All Weapons`: Adds every weapon in the database to your bag.
   * `Add All Shields`: Adds every shield in the database to your bag.
   * `Add All Accessories`: Adds every accessory and ring in the database to your bag.
+* **Upgrade All Weapons**: Forges/upgrades all weapons in your inventory and equipped to maximum tier (★).
 
 ### 🚩 Squad Units
 * Inspect all 10 squads.

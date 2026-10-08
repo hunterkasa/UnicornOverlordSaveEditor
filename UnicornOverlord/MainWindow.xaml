@@ -62,12 +62,14 @@
 				<MenuItem Header="Max All Characters' Dew Stats (5 Legit)" Command="{Binding MaxDewsAllCommand}"/>
 				<MenuItem Header="Max All Rapport Bonds Across Army (1000)" Command="{Binding MaxBondsAllCommand}"/>
 				<Separator/>
+				<MenuItem Header="Upgrade All Weapons (Max Tier ★)" Command="{Binding UpgradeAllWeaponsCommand}"/>
 				<MenuItem Header="Unlock All 10 Units (Max Capacity 5)" Command="{Binding UnlockAllUnitsCommand}"/>
 			</MenuItem>
 			<MenuItem Header="Inventory(_I)">
 				<MenuItem Header="Add All Weapons" Command="{Binding AddAllWeaponsCommand}"/>
 				<MenuItem Header="Add All Shields" Command="{Binding AddAllShieldsCommand}"/>
 				<MenuItem Header="Add All Accessories" Command="{Binding AddAllAccessoriesCommand}"/>
+				<MenuItem Header="Upgrade All Weapons (Max Tier ★)" Command="{Binding UpgradeAllWeaponsCommand}"/>
 				<Separator/>
 				<MenuItem Header="Add All Consumables (x99)" Command="{Binding AddAllConsumablesCommand}"/>
 				<MenuItem Header="Add All Materials &amp; Valuables (x99)" Command="{Binding AddAllMaterialsCommand}"/>
@@ -696,6 +698,7 @@
 								<Button Content="Add All Weapons" Command="{Binding AddAllWeaponsCommand}" Padding="8,3" Margin="4,0"/>
 								<Button Content="Add All Shields" Command="{Binding AddAllShieldsCommand}" Padding="8,3" Margin="4,0"/>
 								<Button Content="Add All Accessories" Command="{Binding AddAllAccessoriesCommand}" Padding="8,3" Margin="4,0"/>
+								<Button Content="⭐ Upgrade All Weapons" Command="{Binding UpgradeAllWeaponsCommand}" ToolTip="Upgrade all weapons in inventory and equipped to maximum tier (★)" Padding="8,3" Margin="4,0" FontWeight="SemiBold"/>
 								<Button Content="❌ Delete" Command="{Binding DeleteEquipmentCommand}" Padding="8,3" Margin="4,0"/>
 							</StackPanel>
 							<StackPanel Orientation="Horizontal">
