@@ -125,11 +125,34 @@ namespace UnicornOverlord
 
 		public bool Upgraded
 		{
-			get => SaveData.Instance().ReadNumber(mAddress + 17, 1) != 0;
+			get
+			{
+				byte statusByte = (byte)SaveData.Instance().ReadNumber(mAddress + 16, 1);
+				return (statusByte >> 4) != 0;
+			}
 			set
 			{
-				SaveData.Instance().WriteNumber(mAddress + 17, 1, value ? 1U : 0);
+				byte statusByte = (byte)SaveData.Instance().ReadNumber(mAddress + 16, 1);
+				byte type = (byte)(statusByte & 0x0F);
+				if (type == 0)
+				{
+					if (Info.Instance().KindDict.TryGetValue(ID, out var kind) && byte.TryParse(kind.Name, out byte t))
+					{
+						type = t;
+					}
+					else
+					{
+						type = 5;
+					}
+				}
+
+				byte newStatusByte = value ? (byte)(type | 0x10) : type;
+				SaveData.Instance().WriteNumber(mAddress + 16, 1, newStatusByte);
+				// Reset byte 17 back to 0 to repair any previously bugged writes
+				SaveData.Instance().WriteNumber(mAddress + 17, 1, 0);
+
 				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Upgraded)));
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Status)));
 				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DisplayTitle)));
 			}
 		}
